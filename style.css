@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    background-color: yellow;
+}
+.div-container {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    justify-content: center;
+    height: 100vh;
+    align-content: center;
+    gap: 3px
+}
+
+.box{
+    background-color: green;
+    border-radius: 10px;
+    position: relative;
+}
+
+.jack-dot {
+    position: absolute;
+    background-color: red;
+    top: 25px;
+    left: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    z-index: 1;
+}
