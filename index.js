@@ -17,30 +17,48 @@ function startGame(){
     container.style.display = 'grid'
     container.style.gridTemplateColumns = `repeat(${num}, 1fr)`
     container.style.gridTemplateRows = `repeat(${num}, 1fr)`
-    
     for(i = 0; i < num; i++){
         for(j = 0; j < num; j++){
             let box = document.createElement('div');
             box.className = 'box';
             box.id = `b[${i}][${j}]`
             container.appendChild(box);
+        }
+    }
             
-            
+    for(i = 0; i < num; i++){
+        for(j = 0; j < num; j++){
+    
             if(Math.random()>0.7){
                 let wall = Math.ceil(Math.random() * 4);
                 if(wall === 1){
                     box = document.getElementById(`b[${i}][${j}]`);
                     box.style.borderTop = '1px solid black'
-                    
+                    if (i - 1 >= 0){
+                        box = document.getElementById(`b[${i-1}][${j}]`);
+                        box.style.borderBottom = '1px solid black'             
+                    }
                 } else if(wall === 2){
                     box = document.getElementById(`b[${i}][${j}]`);
                     box.style.borderLeft = '1px solid black'
+                    if (j-1 >= 0){
+                        box = document.getElementById(`b[${i}][${j-1}]`);
+                        box.style.borderRight = '1px solid black'  
+                    }
                 } else if(wall === 3){
                     box = document.getElementById(`b[${i}][${j}]`);
                     box.style.borderRight = '1px solid black'
+                    if (j+1 < num){
+                        box = document.getElementById(`b[${i}][${j+1}]`);
+                        box.style.borderLeft = '1px solid black'
+                    }
                 } else if(wall === 4){
                     box = document.getElementById(`b[${i}][${j}]`);
                     box.style.borderBottom = '1px solid black'
+                    if (i+1 < num){
+                        box = document.getElementById(`b[${i+1}][${j}]`);
+                        box.style.borderTop = '1px solid black'
+                    }
                 }
             }
             
@@ -70,7 +88,7 @@ function startGame(){
 
     document.onkeydown = (e) => {
         e = e || window.event;
-        if (e.keyCode === 38) { //arrow up
+        if (e.key === "ArrowUp") { //arrow up
             jack.classList.remove('jack-dot');
 
             let jackPosUp = document.getElementById(`b[${jackX + direction[3][0]}][${jackY + direction[3][1]}]`);
@@ -89,7 +107,7 @@ function startGame(){
             }
 
     
-        } else if (e.keyCode === 40) { //arrow down
+        } else if (e.key === "ArrowDown") { //arrow down
             jack.classList.remove('jack-dot');
             
             let jackPosDown = document.getElementById(`b[${jackX + direction[1][0]}][${jackY + direction[1][1]}]`);
@@ -107,7 +125,7 @@ function startGame(){
                 jackY = jackY + direction[1][1];
             }
 
-        } else if (e.keyCode === 37) { //arrow left
+        } else if (e.key === "ArrowLeft") { //arrow left
             jack.classList.remove('jack-dot');
 
             let jackPosLeft = document.getElementById(`b[${jackX + direction[2][0]}][${jackY + direction[2][1]}]`);
@@ -125,7 +143,7 @@ function startGame(){
                 jackY = jackY + direction[2][1];
             }
 
-        } else if (e.keyCode === 39) { //arrow right
+        } else if (e.key === "ArrowRight") { //arrow right
             jack.classList.remove('jack-dot');
     
             let jackPosRight = document.getElementById(`b[${jackX + direction[0][0]}][${jackY + direction[0][1]}]`);
