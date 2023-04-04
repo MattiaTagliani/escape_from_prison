@@ -1,0 +1,13 @@
+creazione area di gioco
+
+funzione che crea la griglia
+
+funzione che posiziona jack
+
+funzione che posiziona l'uscita
+
+randomizza posizione jack allo start
+
+spostare con le frecce
+
+countdown
