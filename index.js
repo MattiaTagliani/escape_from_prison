@@ -1,11 +1,13 @@
+const direction = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+
 function startGame(){
-    const direction = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+    let inputNum = document.querySelector(".input-num");
+    let num = int(inputNum.value);
+    console.log(num);
     
     let container = document.querySelector('.div-container');
     container.innerHTML = ''
     
-    let inputNum = document.querySelector(".input-num");
-    let num = + inputNum.value;
     
     let jailGrid = []
 
@@ -25,46 +27,10 @@ function startGame(){
             container.appendChild(box);
         }
     }
-            
-    for(i = 0; i < num; i++){
-        for(j = 0; j < num; j++){
-    
-            if(Math.random()>0.7){
-                let wall = Math.ceil(Math.random() * 4);
-                if(wall === 1){
-                    box = document.getElementById(`b[${i}][${j}]`);
-                    box.style.borderTop = '1px solid black'
-                    if (i - 1 >= 0){
-                        box = document.getElementById(`b[${i-1}][${j}]`);
-                        box.style.borderBottom = '1px solid black'             
-                    }
-                } else if(wall === 2){
-                    box = document.getElementById(`b[${i}][${j}]`);
-                    box.style.borderLeft = '1px solid black'
-                    if (j-1 >= 0){
-                        box = document.getElementById(`b[${i}][${j-1}]`);
-                        box.style.borderRight = '1px solid black'  
-                    }
-                } else if(wall === 3){
-                    box = document.getElementById(`b[${i}][${j}]`);
-                    box.style.borderRight = '1px solid black'
-                    if (j+1 < num){
-                        box = document.getElementById(`b[${i}][${j+1}]`);
-                        box.style.borderLeft = '1px solid black'
-                    }
-                } else if(wall === 4){
-                    box = document.getElementById(`b[${i}][${j}]`);
-                    box.style.borderBottom = '1px solid black'
-                    if (i+1 < num){
-                        box = document.getElementById(`b[${i+1}][${j}]`);
-                        box.style.borderTop = '1px solid black'
-                    }
-                }
-            }
-            
-        }
-    }
 
+    createWall();
+            
+    
     //create Jack
     let jackX = jailGrid.slice().sort(function() {return .5 - Math.random() })[0];
     let jackY = jailGrid.slice().sort(function() {return .5 - Math.random() })[0];
@@ -84,7 +50,6 @@ function startGame(){
     exit.classList.add("exit-dot");
     exitPos.appendChild(exit);
     
-
 
     document.onkeydown = (e) => {
         e = e || window.event;
@@ -142,7 +107,7 @@ function startGame(){
                 jackX = jackX + direction[2][0];
                 jackY = jackY + direction[2][1];
             }
-
+            
         } else if (e.key === "ArrowRight") { //arrow right
             jack.classList.remove('jack-dot');
     
@@ -166,9 +131,50 @@ function startGame(){
         if((jackX === exitX)&&(jackY === exitY)){
             container.innerHTML = '<p>JACK IS FREE</p>'
         }
-
+        
         jackPos = document.getElementById(`b[${jackX}][${jackY}]`);
         jack.classList.add("jack-dot");
         jackPos.appendChild(jack);
     }
 };
+
+function createWall(){
+for(i = 0; i < num; i++){
+    for(j = 0; j < num; j++){
+
+        if(Math.random()>0.7){
+            let wall = Math.ceil(Math.random() * 4);
+            if(wall === 1){
+                box = document.getElementById(`b[${i}][${j}]`);
+                box.style.borderTop = '1px solid black'
+                if (i - 1 >= 0){
+                    box = document.getElementById(`b[${i-1}][${j}]`);
+                    box.style.borderBottom = '1px solid black'             
+                }
+            } else if(wall === 2){
+                box = document.getElementById(`b[${i}][${j}]`);
+                box.style.borderLeft = '1px solid black'
+                if (j-1 >= 0){
+                    box = document.getElementById(`b[${i}][${j-1}]`);
+                    box.style.borderRight = '1px solid black'  
+                }
+            } else if(wall === 3){
+                box = document.getElementById(`b[${i}][${j}]`);
+                box.style.borderRight = '1px solid black'
+                if (j+1 < num){
+                    box = document.getElementById(`b[${i}][${j+1}]`);
+                    box.style.borderLeft = '1px solid black'
+                }
+            } else if(wall === 4){
+                box = document.getElementById(`b[${i}][${j}]`);
+                box.style.borderBottom = '1px solid black'
+                if (i+1 < num){
+                    box = document.getElementById(`b[${i+1}][${j}]`);
+                    box.style.borderTop = '1px solid black'
+                }
+            }
+        }
+        
+    }
+}
+}
