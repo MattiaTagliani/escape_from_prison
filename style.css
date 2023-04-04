@@ -1,30 +1,98 @@
+
 body {
     margin: 0;
     background-color: yellow;
-}
-.div-container {
-    display: grid;
-    grid-template-columns: 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     height: 100vh;
-    align-content: center;
-    gap: 3px
+    align-items: center;
+}
+
+.input-container {
+    width: 90vh;
+    margin-bottom: 40px;
+}
+.input-num {
+    height: 33px;
+    width: 384px;
+    padding-left: 15px;
+    border: none;
+    box-shadow: 5px 5px 10px black;
+    border-radius: 4px 0 0 4px;
+}
+
+.input-num:focus {
+    outline: none;
+}
+
+
+.create-btn {
+    height: 35px;
+    width: 80px;
+    margin-left: 15px;
+    border: none;
+    box-shadow: 5px 5px 10px black;
+    background-color: green;
+    color: white;
+    border-radius: 0 4px 4px 0;
+}
+
+.create-btn:focus {
+    outline: none;
+}
+
+.create-btn:hover {
+    opacity: .8;
+    cursor: pointer;
+}
+
+.div-container {
+    height: 80vh;
+    width: 90vh;
+    border: 1px solid black;
 }
 
 .box{
     background-color: green;
-    border-radius: 10px;
     position: relative;
 }
+
+
 
 .jack-dot {
     position: absolute;
     background-color: red;
-    top: 25px;
-    left: 25px;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.exit-dot {
+    position: absolute;
+    background-color: lightblue;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
     z-index: 1;
+}
+
+p {
+    position: absolute;
+    display: flex;
+    background-color: lightblue;
+    margin: 0;
+    justify-content: center;
+    top: 45%;
+    font-family: cursive;
+    font-size: 60px;
+    width: 512px;
+
 }
