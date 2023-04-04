@@ -1,9 +1,9 @@
-const direction = [[0, 1], [1, 0], [0, -1], [-1, 0]]
-
 function startGame(){
+    
+    const direction = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+
     let inputNum = document.querySelector(".input-num");
-    let num = int(inputNum.value);
-    console.log(num);
+    let num = + inputNum.value;
     
     let container = document.querySelector('.div-container');
     container.innerHTML = ''
@@ -16,18 +16,9 @@ function startGame(){
     }
 
     //make grid
-    container.style.display = 'grid'
-    container.style.gridTemplateColumns = `repeat(${num}, 1fr)`
-    container.style.gridTemplateRows = `repeat(${num}, 1fr)`
-    for(i = 0; i < num; i++){
-        for(j = 0; j < num; j++){
-            let box = document.createElement('div');
-            box.className = 'box';
-            box.id = `b[${i}][${j}]`
-            container.appendChild(box);
-        }
-    }
+    createGrid()
 
+    //make walls
     createWall();
             
     
@@ -136,45 +127,59 @@ function startGame(){
         jack.classList.add("jack-dot");
         jackPos.appendChild(jack);
     }
-};
 
-function createWall(){
-for(i = 0; i < num; i++){
-    for(j = 0; j < num; j++){
-
-        if(Math.random()>0.7){
-            let wall = Math.ceil(Math.random() * 4);
-            if(wall === 1){
-                box = document.getElementById(`b[${i}][${j}]`);
-                box.style.borderTop = '1px solid black'
-                if (i - 1 >= 0){
-                    box = document.getElementById(`b[${i-1}][${j}]`);
-                    box.style.borderBottom = '1px solid black'             
-                }
-            } else if(wall === 2){
-                box = document.getElementById(`b[${i}][${j}]`);
-                box.style.borderLeft = '1px solid black'
-                if (j-1 >= 0){
-                    box = document.getElementById(`b[${i}][${j-1}]`);
-                    box.style.borderRight = '1px solid black'  
-                }
-            } else if(wall === 3){
-                box = document.getElementById(`b[${i}][${j}]`);
-                box.style.borderRight = '1px solid black'
-                if (j+1 < num){
-                    box = document.getElementById(`b[${i}][${j+1}]`);
-                    box.style.borderLeft = '1px solid black'
-                }
-            } else if(wall === 4){
-                box = document.getElementById(`b[${i}][${j}]`);
-                box.style.borderBottom = '1px solid black'
-                if (i+1 < num){
-                    box = document.getElementById(`b[${i+1}][${j}]`);
-                    box.style.borderTop = '1px solid black'
-                }
+    function createGrid(){
+        container.style.display = 'grid'
+        container.style.gridTemplateColumns = `repeat(${num}, 1fr)`
+        container.style.gridTemplateRows = `repeat(${num}, 1fr)`
+        for(i = 0; i < num; i++){
+            for(j = 0; j < num; j++){
+                let box = document.createElement('div');
+                box.className = 'box';
+                box.id = `b[${i}][${j}]`
+                container.appendChild(box);
             }
         }
-        
     }
-}
+
+    function createWall(){
+        for(i = 0; i < num; i++){
+            for(j = 0; j < num; j++){
+    
+                if(Math.random()>0.7){
+                    let wall = Math.ceil(Math.random() * 4);
+                    if(wall === 1){
+                        box = document.getElementById(`b[${i}][${j}]`);
+                        box.style.borderTop = '1px solid black'
+                        if (i - 1 >= 0){
+                            box = document.getElementById(`b[${i-1}][${j}]`);
+                            box.style.borderBottom = '1px solid black'             
+                        }
+                    } else if(wall === 2){
+                        box = document.getElementById(`b[${i}][${j}]`);
+                        box.style.borderLeft = '1px solid black'
+                        if (j-1 >= 0){
+                            box = document.getElementById(`b[${i}][${j-1}]`);
+                            box.style.borderRight = '1px solid black'  
+                        }
+                    } else if(wall === 3){
+                        box = document.getElementById(`b[${i}][${j}]`);
+                        box.style.borderRight = '1px solid black'
+                        if (j+1 < num){
+                            box = document.getElementById(`b[${i}][${j+1}]`);
+                            box.style.borderLeft = '1px solid black'
+                        }
+                    } else if(wall === 4){
+                        box = document.getElementById(`b[${i}][${j}]`);
+                        box.style.borderBottom = '1px solid black'
+                        if (i+1 < num){
+                            box = document.getElementById(`b[${i+1}][${j}]`);
+                            box.style.borderTop = '1px solid black'
+                        }
+                    }
+                }
+                
+            }
+        }
+    };
 }
